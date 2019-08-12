@@ -1,2 +1,0 @@
-let specificInstance = await ArchiveCertification.at("0x71EEb9099DAf07D743ef51E42AEC862C3c106532"
-specificInstance.signCertificate("0xc188ef54a943bc68c0b54573083507cbfffd1d23","test","test description","§§0xc188ef54a943bc68c0b54573083507cbfffd1d23§prima scrittura",343)
