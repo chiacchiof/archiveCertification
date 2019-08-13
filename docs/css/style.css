@@ -34,8 +34,8 @@ article p {
 }
 
 #mapContainer {
-    min-height: 250px;
-    width: auto;
+    min-height: 300px;
+    width: 50%;
     border:10px solid #eaeaea;
 }
 
@@ -113,6 +113,19 @@ ul.topnav li.dropdownIcon {
 
 /*##### Custom styles #########*/
 
+ul.trackProcess{
+  list-style-type: none;
+    font-size: 30px;
+}
+li.owner{
+    list-style-position:inside;
+    border: 1px solid black;    
+    font-weight: bold; 
+}
+li.phase{
+    background-color:white; 
+}
+
 #section-1-gradient {
   background: #076DFF; /* For browsers that do not support gradients */
     background: -webkit-linear-gradient(#076DFF, #65a5ff); /* For Safari 5.1 to 6.0 */
@@ -154,23 +167,21 @@ button.learnMore {
   display: block;
   margin: auto;
 }
-  
 
 div.leftSide-col {
   margin-left: 15%;
 }
 
-div.centerSide {
-  margin-left: 40%;
+div.centerSide-col {
+  margin-left: 30%;
 }
 
+div.leftSide-col6 {
+  margin-left: 30%;
+}
 
 div.rightSide-col {
   margin-right: 15%;
-}
-
-div.centerSide-col {
-  margin: 10%;
 }
 
 h1.large {
@@ -186,7 +197,7 @@ h1.section2Header {
 
 
 form h2 {
-  color: #fff;
+  color: #000;
 }
 
 input[type="text"]{
@@ -219,6 +230,9 @@ footer.footsy ul li {
   line-height: 1.5;
 }
 
+#trackForm{
+    display:none;
+}
 /*######### Mobile ###########*/
 
 @media screen and (max-width: 680px) {
@@ -285,7 +299,7 @@ footer.footsy ul li {
   }
   
   div.leftSide-col,
-  div.rightSide-col, div.centerSide-col {
+  div.rightSide-col {
     margin: 5px;
   }
   
