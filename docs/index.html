@@ -33,28 +33,44 @@
         <div class="container">
             <div class = "row">
                 <div class ="col-6">
-                    <div class = "leftSide-col">
-                        <div class = "centerSide">
-                            <canvas id="QRCodeCanvasAccount"></canvas>
-                        </div>
-                        <h1 id="account"></h1>
-                        <h1 id="accountBalance"></h1>
+                    <div class = "leftSide-col6">
+                        <canvas id="QRCodeCanvasAccount"></canvas>
+                        <p> Account address</p>
+                        <p id="account"></p>
+                        <p> Account balance</p>
+                        <p id="accountBalance"></p>
                     </div>
-                    <div class = "leftSide-col" id="result">
+                </div>
+                <div class="col-6">
+                    <div id="resultGPS" class = "rightSide-col6">
                         <!--Position information will be inserted here-->
-                        <button type="button" onclick="showPosition();">Show Position</button>
+                        <!--button type="button" onclick="showPosition();">Show Position</button-->
                     </div>
-                    <div class = "leftSide-col" id="mapContainer"></div>
+                    <div  class = "rightSide-col6"  id="mapContainer"></div>
                 </div>
-                <div class ="col-3">
-                    <div class = "centerSide-col">
-                        <canvas id="QRCodeCanvasProd" class="QRCode"></canvas>
+            </div>
+            <hr>
+            <div class = "row">    
+                <div class ="col-6">
+                    <div class = "leftSide-col6">
                         <p id="certificateName"></p>
+                        <canvas id="QRCodeCanvasProd" class="QRCode"></canvas>
                     </div>
                 </div>
-                <div class ="col-3">
-                    <div class = "rightSide-col">
-                        <ul id="certificateProcessInfo" class="collapse list-group"></ul>
+                <div class="col-6">
+                    <div>
+                        <div  class = "rightSide-col6">
+                            <p> Traceability Movements</p>
+                            <ul class="trackProcess" id="certificateProcessInfo">
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class ="row" id="trackForm">
+                <div class ="col-12">
+                    <div class = "leftSide-col">
                         <form>
                               <h2>Insert new Status</h2>
                               <input class="inputbox" id="newstatus" type="text" placeholder="New status">
@@ -62,7 +78,7 @@
                               <h2>Insert next Owner</h2>
                               <input class="inputbox" id="newowner" type="text" placeholder="New owner">
                               <button onclick="App.modifyProcessOwner(); return false"> Modify Owner</button>
-                        </form>
+                        </form> 
                     </div>
                 </div>
             </div>
