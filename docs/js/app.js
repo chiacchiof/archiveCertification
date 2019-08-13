@@ -5,6 +5,7 @@ App = {
   loading: false,
   certificateIDBC : null,
   init: function() {
+      showPosition();
     return App.initWeb3();
   },
     
@@ -25,8 +26,8 @@ App = {
           console.log('qrcode certificate success!');
       })
   },
-
-  initWeb3: function() {
+    
+    initWeb3: function() {
     // initialize web3
     if(typeof web3 !== 'undefined') {
       //reuse the provider of the Web3 object injected by Metamask
@@ -86,13 +87,16 @@ App = {
           return ArchiveCertificationInstance.getCertificate(certificateIDBC, certificateUniqueID);
         }).then(function(certificationInfo) {
           // retrieve the article placeholder and clear it
-          $('#certificateName').text(certificationInfo[0]);
+         if(certificationInfo[3]===App.account){
+             $('#trackForm').show();
+         } $('#certificateName').text(certificationInfo[0]);
           var processOwners = (certificationInfo[1]).split("§§");
           
           for (i=1;i<processOwners.length;i++){
             var processInfo = (processOwners[i]).split("§");
-            for (j=0;j<processInfo.length;j++){
-            $("#certificateProcessInfo").append('<li class="list-group-item">' + processInfo[j] + '</li>');
+             $("#certificateProcessInfo").append('<li class="owner">' + processInfo[0] + '</li>');
+            for (j=1;j<processInfo.length;j++){
+            $("#certificateProcessInfo").append('<li class="phase">' + processInfo[j] + '</li>');
             }
          }
           App.createQRCodeCertificate(certificationInfo[0]+"&"+certificationInfo[1]); 
