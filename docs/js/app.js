@@ -9,13 +9,22 @@ App = {
     return App.initWeb3();
   },
     
-  createQRCodeAccount:function(){
+  createQRCodeAccount:function(account){
       //QRCode = require('qrcode');
       canvas = document.getElementById('QRCodeCanvasAccount');
       QRCode.toCanvas(canvas, account.toString(), function(error){
           if(error) console.error(error)
           console.log('qrcode account success!');
       })
+  },
+
+  createQRCode:function(account,elementAccountId){
+  //QRCode = require('qrcode');
+  canvas = document.getElementById(elementAccountId);
+  QRCode.toCanvas(canvas, account.toString(), function(error){
+      if(error) console.error(error)
+      console.log('qrcode account success!');
+  })
   },
     
   createQRCodeCertificate:function(infoCertificate){
@@ -35,6 +44,7 @@ App = {
     } else {
       //create a new provider and plug it directly into our local node
       App.web3Provider = new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/bd3f6da3dd35401483729f00acfe5496");
+      //App.web3Provider = new Web3.providers.HttpProvider("127.0.0.1:7545");    
     }
     web3 = new Web3(App.web3Provider);
     urlParams = new URLSearchParams(window.location.search);
@@ -49,7 +59,7 @@ App = {
     web3.eth.getCoinbase(function(err, account) {
       if(err === null) {
         App.account = account;
-        $('#account').text(account);
+        //$('#account').text(account);
         web3.eth.getBalance(account, function(err, balance) {
           if(err === null) {
             $('#accountBalance').text(web3.fromWei(balance, "ether") + " ETH");
@@ -90,17 +100,21 @@ App = {
          if(certificationInfo[3]===App.account){
              $('#trackForm').show();
          } $('#certificateName').text(certificationInfo[0]);
+          
           var processOwners = (certificationInfo[1]).split("§§");
           
+          qrcodeCounter = 0;
           for (i=1;i<processOwners.length;i++){
             var processInfo = (processOwners[i]).split("§");
-             $("#certificateProcessInfo").append('<li class="owner">' + processInfo[0] + '</li>');
             for (j=1;j<processInfo.length;j++){
-            $("#certificateProcessInfo").append('<li class="phase">' + processInfo[j] + '</li>');
+                var markup = "<tr><td><canvas id='QRCodeCanvasAccountId_"+(qrcodeCounter)+"' class='QRCode'/></td><td>" + processInfo[j] + "</td><td>32.45422; 16.4523222 </td><td> 18:15:23 11-02-19</td></tr>";
+                $("table tbody").append(markup);
+                App.createQRCode(processInfo[i-1],'QRCodeCanvasAccountId_'+(qrcodeCounter));
+                qrcodeCounter = qrcodeCounter+1;
             }
          }
           App.createQRCodeCertificate(certificationInfo[0]+"&"+certificationInfo[1]); 
-          App.createQRCodeAccount(account); 
+          App.createQRCodeAccount(App.account); 
                 
           App.loading = false;
         }).catch(function(err) {
@@ -153,6 +167,7 @@ App = {
         } else {
           console.error(error);
         }
+        $("#TrackOperationTable tbody").empty(); 
         App.reloadCertification();
       });
 

@@ -1,8 +1,10 @@
-    function showPosition(){
+   function showPosition(){
         if(navigator.geolocation){
             navigator.geolocation.getCurrentPosition(function(position){
-                var positionInfo = "Your current position is (" + "Latitude: " + position.coords.latitude + ", " + "Longitude: " + position.coords.longitude + ")";
-                document.getElementById("result").innerHTML = positionInfo;
+                var latitudeInfo = "Latitude: " + position.coords.latitude;
+                document.getElementById("LatitudeGPS").innerHTML = latitudeInfo;
+                var longitudeInfo = "Longitude: " + position.coords.latitude;
+                document.getElementById("LongitudeGPS").innerHTML = longitudeInfo;
             });
         } else{
             alert("Sorry, your browser does not support HTML5 geolocation.");
@@ -29,7 +31,7 @@
             var marker = new google.maps.Marker({
                     position: coords,
                     map: map,
-                    title: "Your current location!"
+                    title: "Current Location!"
             });
  
         });
